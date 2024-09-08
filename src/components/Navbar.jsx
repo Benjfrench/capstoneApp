@@ -34,6 +34,7 @@ export const Navbar = () => {
           <Button color="inherit" component={Link} to="/">Home</Button>
           <Button color="inherit" component={Link} to="/calendar">Calendar</Button>
           <Button color="inherit" component={Link} to="/workout">Workout</Button>
+          <Button color="inherit" component={Link} to="/createWorkout">Create Workout</Button>
         </Box>
 
         {/* Right side: Hamburger menu for small screens */}

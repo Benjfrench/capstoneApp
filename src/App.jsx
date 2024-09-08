@@ -7,6 +7,7 @@ import { Navbar } from "./components/Navbar";
 import { CalendarPage } from "./containers/Calendar";
 import { WorkoutPage } from "./containers/WorkoutContainer";
 import { ConditionalRoute } from "./components/ConditionalRoute";
+import { CreateWorkoutPage } from "./containers/CreateWorkoutCont";
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                 <Route path="verification" element={<ContextWork />} />
                 <Route path="/calendar" element={<CalendarPage/>}/>
                 <Route path="/workout" element={<WorkoutPage/>}/>
+                <Route path="/createWorkout" element={<CreateWorkoutPage/>}/>
                 <Route path="*" element={<div>This path doesn't exist yet...</div>} />
             </Routes>
         </UserProvider>
