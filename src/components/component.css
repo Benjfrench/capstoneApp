@@ -1,0 +1,45 @@
+.container {
+  display: inline-block;
+  transform-origin: center;
+  padding: 20px;
+  animation: rotate 1s infinite; /* Add the animation directly to the container */
+}
+
+.top {
+  border-bottom: 20px solid #999;
+  width: 100px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.trapezoid {
+  border-bottom: 70px solid #999;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  height: 0;
+  width: 100px;
+}
+
+.trapezoid2 {
+  border-top: 200px solid #777;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  height: 0;
+  width: 100px;
+}
+
+@keyframes rotate {
+  0%,
+  100% {
+    transform: rotate(-30deg);
+  }
+  25% {
+    transform: rotate(30deg);
+  }
+  50% {
+    transform: rotate(-30deg);
+  }
+  75% {
+    transform: rotate(30deg);
+  }
+}
