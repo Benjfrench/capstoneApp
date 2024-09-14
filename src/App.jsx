@@ -9,6 +9,7 @@ import { WorkoutPage } from "./containers/WorkoutContainer";
 import { ConditionalRoute } from "./components/ConditionalRoute";
 import { CreateWorkoutPage } from "./containers/CreateWorkoutCont";
 // import { CreateAccountPage } from "./containers/CreateAccount";
+import { CreateAccountPage } from "./containers/CreateAccount";
 
 const App = () => {
     return (
@@ -21,6 +22,7 @@ const App = () => {
                 <Route path="/workout" element={<WorkoutPage/>}/>
                 <Route path="/createWorkout" element={<CreateWorkoutPage/>}/>
                 {/* <Route path="/createAccount" element={<CreateAccountPage/>}/> */}
+                <Route path="/createAccount" element={<CreateAccountPage/>}/>
                 <Route path="*" element={<div>This path doesn't exist yet...</div>} />
             </Routes>
         </UserProvider>
