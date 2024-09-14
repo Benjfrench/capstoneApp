@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CustomMonthLayout } from "../components/calendar";
+import { FormModal } from "../components/modal";
 
 export const CalendarPage = () => {
   const [selectedActivity, setSelectedActivity] = useState(null);
@@ -25,6 +26,7 @@ export const CalendarPage = () => {
           )}
         </div>
       )}
+      <FormModal/>
     </div>
   );
 };
