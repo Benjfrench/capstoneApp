@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import { TextField, Button, Typography, Box } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { TextField, Button, Typography, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
 
     // Basic validation
-    if (username === '' || password === '') {
-      setError('Please enter both username and password.');
+    if (username === "" || password === "") {
+      setError("Please enter both username and password.");
       return;
     }
 
-    setError(''); // Clear error on successful validation
+    setError(""); // Clear error on successful validation
 
     // Placeholder for actual login logic
-    console.log('Logging in with:', { username, password });
+    console.log("Logging in with:", { username, password });
 
     // You can perform login logic here, such as sending a request to your API.
   };
@@ -27,11 +27,13 @@ export const Login = () => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "50vh",
+        padding: 0,
+        border: "none"
       }}
     >
       <Typography variant="h4" component="h1" gutterBottom>
@@ -42,11 +44,16 @@ export const Login = () => {
         component="form"
         onSubmit={handleLogin}
         sx={{
-          width: '100%',
+          width: "100%",
           maxWidth: 360,
-          display: 'flex',
-          flexDirection: 'column',
+          display: "flex",
+          flexDirection: "column",
           gap: 2,
+          padding: 2, // Padding inside the form container
+          border: "2px solid #ccc",
+          borderRadius: 2, // Rounded corners for the border
+          boxShadow: "0 0 8px rgba(0, 0, 0, 0.1)", // Optional shadow
+          backgroundColor: "white"
         }}
       >
         {/* Username Field */}
@@ -79,11 +86,16 @@ export const Login = () => {
         <Button type="submit" variant="contained" color="primary" fullWidth>
           Login
         </Button>
-        <Button component={Link} to="/createAccount" variant="contained" color="primary" fullWidth>
+        <Button
+          component={Link}
+          to="/createAccount"
+          variant="contained"
+          color="primary"
+          fullWidth
+        >
           Create Account
         </Button>
       </Box>
     </Box>
   );
 };
-

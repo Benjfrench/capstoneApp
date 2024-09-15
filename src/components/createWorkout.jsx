@@ -76,9 +76,9 @@ export const WorkoutForm = () => {
   return (
     <div>
       <FormControl fullWidth margin="normal">
-        <InputLabel>Filter by Muscle</InputLabel>
+        {/* <InputLabel>Filter by Muscle</InputLabel> */}
         <Select value={selectedMuscle} onChange={(e) => setSelectedMuscle(e.target.value)} displayEmpty>
-          <MenuItem value=""><em>None</em></MenuItem>
+          <MenuItem value=""><em>Filter by muscle</em></MenuItem>
           {muscles.map(muscle => (
             <MenuItem key={muscle} value={muscle}>{muscle}</MenuItem>
           ))}
@@ -86,9 +86,9 @@ export const WorkoutForm = () => {
       </FormControl>
 
       <FormControl fullWidth margin="normal">
-        <InputLabel>Filter by Type</InputLabel>
+        {/* <InputLabel>Filter by Type</InputLabel> */}
         <Select value={selectedType} onChange={(e) => setSelectedType(e.target.value)} displayEmpty>
-          <MenuItem value=""><em>None</em></MenuItem>
+          <MenuItem value=""><em>Filter by Type</em></MenuItem>
           {types.map(type => (
             <MenuItem key={type} value={type}>{type}</MenuItem>
           ))}
@@ -96,9 +96,9 @@ export const WorkoutForm = () => {
       </FormControl>
 
       <FormControl fullWidth margin="normal">
-        <InputLabel>Choose Exercise</InputLabel>
+        {/* <InputLabel>Choose Exercise</InputLabel> */}
         <Select value={selectedExercise} onChange={handleExerciseChange} displayEmpty>
-          <MenuItem value=""><em>None</em></MenuItem>
+          <MenuItem value=""><em>Choose Exercise</em></MenuItem>
           {exercises.map(exercise => (
             <MenuItem key={exercise.name} value={exercise.name}>{exercise.name}</MenuItem>
           ))}

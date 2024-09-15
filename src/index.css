@@ -5,7 +5,8 @@
 
   color-scheme: light dark;
   color: rgb(0, 0, 0);
-  background-color: #ffffff;
+  background-color: #000000;
+  /* background-image: url('/BackgroundImage.jpg'); */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,7 +15,7 @@
 }
 
 #root{
-  padding: 0px 16px 8px 16px;
+  padding: 0px 0px 8px 0px;
 }
 
 a {
@@ -34,9 +35,21 @@ body {
   min-height: 100vh;
 }
 
+
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+h3 {
+  padding: 0;
+  margin: 10
+}
+
+p {
+  padding: 0;
+  margin: 5;
 }
 
 button {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';  // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -9,6 +9,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { LoginModal } from './loginModal';
 
 export const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -24,20 +25,19 @@ export const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        {/* Left side: Logo or Title */}
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 0, marginLeft: '1rem' }}>
           TeamTrainer
         </Typography>
 
-        {/* Right side: Links for larger screens */}
-        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, justifyContent: 'flex-end' }}>
           <Button color="inherit" component={Link} to="/">Home</Button>
           <Button color="inherit" component={Link} to="/calendar">Calendar</Button>
           <Button color="inherit" component={Link} to="/workout">Workout</Button>
           <Button color="inherit" component={Link} to="/createWorkout">Create Workout</Button>
+          {/* Use the LoginModal here */}
+          <LoginModal />
         </Box>
 
-        {/* Right side: Hamburger menu for small screens */}
         <IconButton
           edge="end"
           color="inherit"
@@ -53,13 +53,12 @@ export const Navbar = () => {
           onClose={handleMenuClose}
           sx={{ display: { xs: 'block', md: 'none' } }}
         >
-          <MenuItem component={Link} to="/home" onClick={handleMenuClose}>Home</MenuItem>
-          <MenuItem component={Link} to="/about" onClick={handleMenuClose}>About</MenuItem>
-          <MenuItem component={Link} to="/services" onClick={handleMenuClose}>Services</MenuItem>
-          <MenuItem component={Link} to="/contact" onClick={handleMenuClose}>Contact</MenuItem>
+          <MenuItem component={Link} to="/" onClick={handleMenuClose}>Home</MenuItem>
+          <MenuItem component={Link} to="/calendar" onClick={handleMenuClose}>Calendar</MenuItem>
+          <MenuItem component={Link} to="/workout" onClick={handleMenuClose}>Workout</MenuItem>
+          <MenuItem component={Link} to="/createWorkout" onClick={handleMenuClose}>Create Workout</MenuItem>
         </Menu>
       </Toolbar>
     </AppBar>
   );
 };
-
