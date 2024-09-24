@@ -1,37 +1,59 @@
 import { useState } from "react";
 import { Button, Dialog, DialogContent, TextField, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../context/AuthContext'; // Import your auth context
 
 export const LoginModal = () => {
   const [open, setOpen] = useState(false);
-  const [username, setUsername] = useState("");
+  const [emailId, setEmailId] = useState(""); // Use emailId
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth(); // Get the login function from context
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     // Basic validation
-    if (username === "" || password === "") {
-      setError("Please enter both username and password.");
+    if (emailId === "" || password === "") {
+      setError("Please enter both email and password.");
       return;
     }
 
     setError(""); // Clear error on successful validation
 
-    // Placeholder for actual login logic
-    console.log("Logging in with:", { username, password });
+    try {
+      const response = await fetch("http://localhost:8081/api/players/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ emailId, password }), // Use emailId
+      });
 
-    // Close modal on successful login
-    handleClose();
+      const data = await response.json();
+
+      console.log("Response from server:", data); // Debug log
+
+      if (data.result === 200) {
+        console.log("Logged in successfully:", data.user);
+        login(data.player); // Update the user state in AuthContext
+        handleClose(); // Close modal on successful login
+        navigate("/calendar"); // Redirect to the desired route
+      } else {
+        console.error("Login failed", data.error)
+        setError(data.message);
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Login failed. Please try again.");
+    }
   };
 
   const handleCreateAccount = () => {
-    // Close the modal and navigate to the create account page
     handleClose();
     navigate("/createAccount");
   };
@@ -51,8 +73,8 @@ export const LoginModal = () => {
             borderRadius: '10px',
             backgroundColor: '#f0f0f0',
             display: 'flex',
-            justifyContent: 'center',  // Center content horizontally
-            alignItems: 'center',       // Center content vertically
+            justifyContent: 'center',
+            alignItems: 'center',
           }
         }}
       >
@@ -68,23 +90,23 @@ export const LoginModal = () => {
               gap: 2,
               padding: 2,
               border: "2px solid #ccc",
-              borderRadius: 2, 
+              borderRadius: 2,
               boxShadow: "0 0 8px rgba(0, 0, 0, 0.1)",
               backgroundColor: "white",
-              alignItems: "center",  // Center the form fields
+              alignItems: "center",
             }}
           >
             <Typography variant="h4" component="h1" gutterBottom>
               Login
             </Typography>
 
-            {/* Username Field */}
+            {/* Email ID Field */}
             <TextField
-              label="Username"
+              label="Email"
               variant="outlined"
               fullWidth
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={emailId} // Use emailId
+              onChange={(e) => setEmailId(e.target.value)} // Update to use emailId
             />
 
             {/* Password Field */}
@@ -104,7 +126,7 @@ export const LoginModal = () => {
               </Typography>
             )}
 
-            {/* Buttons - Positioned directly below the input fields */}
+            {/* Buttons */}
             <Button type="submit" variant="contained" color="primary" fullWidth>
               Login
             </Button>

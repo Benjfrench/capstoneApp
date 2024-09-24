@@ -3,25 +3,44 @@ import { TextField, Button, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
+  // Mark this function as async
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     // Basic validation
-    if (username === "" || password === "") {
-      setError("Please enter both username and password.");
+    if (email === "" || password === "") {
+      setError("Please enter both email and password.");
       return;
     }
 
     setError(""); // Clear error on successful validation
 
-    // Placeholder for actual login logic
-    console.log("Logging in with:", { username, password });
+    try {
+      const response = await fetch("http://localhost:8081/api/players/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ emailId: email, password }), // Sending emailId
+      });
 
-    // You can perform login logic here, such as sending a request to your API.
+      const data = await response.json();
+
+      if (response.ok) {
+        // Handle successful login
+        console.log("Login successful:", data);
+        // You may want to store user info in localStorage or state management
+      } else {
+        setError(data.error); // Show error message from server
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Failed to connect to the server.");
+    }
   };
 
   return (
@@ -49,20 +68,20 @@ export const Login = () => {
           display: "flex",
           flexDirection: "column",
           gap: 2,
-          padding: 2, // Padding inside the form container
+          padding: 2,
           border: "2px solid #ccc",
-          borderRadius: 2, // Rounded corners for the border
-          boxShadow: "0 0 8px rgba(0, 0, 0, 0.1)", // Optional shadow
+          borderRadius: 2,
+          boxShadow: "0 0 8px rgba(0, 0, 0, 0.1)",
           backgroundColor: "white"
         }}
       >
-        {/* Username Field */}
+        {/* Email Field */}
         <TextField
-          label="Username"
+          label="Email"
           variant="outlined"
           fullWidth
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         {/* Password Field */}

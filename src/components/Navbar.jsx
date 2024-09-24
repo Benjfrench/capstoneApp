@@ -10,9 +10,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { LoginModal } from './loginModal';
+import { useAuth } from '../context/AuthContext';
 
 export const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const { user, logout } = useAuth();
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -20,6 +22,10 @@ export const Navbar = () => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -34,10 +40,13 @@ export const Navbar = () => {
           <Button color="inherit" component={Link} to="/calendar">Calendar</Button>
           <Button color="inherit" component={Link} to="/workout">Workout</Button>
           <Button color="inherit" component={Link} to="/createWorkout">Create Workout</Button>
-          {/* Use the LoginModal here */}
-          <LoginModal />
+          {user ? (
+            <Button color="inherit" onClick={handleLogout}>Logout</Button> // Show logout if user is logged in
+          ) : (
+            <LoginModal /> // Show login modal if user is not logged in
+          )}
         </Box>
-
+        
         <IconButton
           edge="end"
           color="inherit"

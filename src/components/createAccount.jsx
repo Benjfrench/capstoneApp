@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import { TextField, Button, Typography, Box } from '@mui/material';
 
 export const CreateAccount = () => {
-  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [emailId, setEmailId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [squadCode, setSquadCode] = useState('');
+  const [squadId, setSquadId] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
-  const handleCreateAccount = (e) => {
+  const handleCreateAccount = async (e) => {
     e.preventDefault();
 
     // Basic validation
-    if (email === '' || password === '' || confirmPassword === '' || squadCode === '') {
+    if (!firstName || !lastName || !emailId || !password || !confirmPassword || !squadId) {
       setError('Please fill out all fields.');
       return;
     }
@@ -22,10 +25,35 @@ export const CreateAccount = () => {
       return;
     }
 
-    setError(''); // Clear error on successful validation
+    setError('');
+    
+    const formData = {
+      firstName,
+      lastName,
+      emailId,
+      password,
+      squadId,
+    };
 
-    // Placeholder for actual account creation logic
-    console.log('Creating account with:', { email, password, squadCode });
+    try {
+      const response = await fetch('http://localhost:8081/api/players/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSuccess('Account created successfully!');
+      } else {
+        setError(result.error || 'Error creating account.');
+      }
+    } catch (error) {
+      setError('Failed to connect to the server.');
+    }
   };
 
   return (
@@ -53,14 +81,32 @@ export const CreateAccount = () => {
           gap: 2,
         }}
       >
+        {/* First Name Field */}
+        <TextField
+          label="First Name"
+          variant="outlined"
+          fullWidth
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+
+        {/* Last Name Field */}
+        <TextField
+          label="Last Name"
+          variant="outlined"
+          fullWidth
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        />
+
         {/* Email Address Field */}
         <TextField
           label="Email Address"
           type="email"
           variant="outlined"
           fullWidth
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={emailId}
+          onChange={(e) => setEmailId(e.target.value)}
         />
 
         {/* Password Field */}
@@ -88,8 +134,8 @@ export const CreateAccount = () => {
           label="Squad Code"
           variant="outlined"
           fullWidth
-          value={squadCode}
-          onChange={(e) => setSquadCode(e.target.value)}
+          value={squadId}
+          onChange={(e) => setSquadId(e.target.value)}
         />
 
         {/* Display error message */}
@@ -99,7 +145,12 @@ export const CreateAccount = () => {
           </Typography>
         )}
 
-        {/* Submit Button */}
+        {success && (
+          <Typography color="primary" sx={{ marginBottom: 2 }}>
+            {success}
+          </Typography>
+        )}
+
         <Button type="submit" variant="contained" color="primary" fullWidth>
           Create Account
         </Button>
