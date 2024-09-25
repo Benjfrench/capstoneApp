@@ -1,19 +1,25 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material"
 import { WorkoutForm } from "./createWorkout";
 import "../App.css";
+import { useAuth } from "../context/AuthContext";
 
 export const FormModal = ()=> {
     const [open, setOpen] = useState(false);
+    const { user } = useAuth();
 
     const handleClickOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
   
+    const isCoach = user?.coach || false;
+
     return (
       <div>
+       {isCoach && ( 
         <Button variant="contained" onClick={handleClickOpen}>
           Add Activity
         </Button>
+      )}
         <Dialog 
         open={open} 
         onClose={handleClose}
