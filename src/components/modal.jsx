@@ -7,11 +7,13 @@ import { useAuth } from "../context/AuthContext";
 export const FormModal = ()=> {
     const [open, setOpen] = useState(false);
     const { user } = useAuth();
+console.log("User in FormModal:", user);
+
 
     const handleClickOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
   
-    const isCoach = user?.coach || false;
+    const isCoach = user?.isCoach || false; 
 
     return (
       <div>
