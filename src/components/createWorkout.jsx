@@ -49,6 +49,7 @@ export const WorkoutForm = () => {
   const [workoutExercises, setWorkoutExercises] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [completionDate, setCompletionDate] = useState("");
 
   useEffect(() => {
     if (selectedMuscle || selectedType) {
@@ -99,24 +100,26 @@ export const WorkoutForm = () => {
       const workoutData = {
         name,
         description,
-        exercises: workoutExercises
+        completionDate,
+        exercises: workoutExercises,
       };
-  
-      axios.post('http://localhost:8081/api/workouts', workoutData)
-        .then(response => {
-          console.log('Workout created:', response.data);
-          alert('Workout successfully created!');
+
+      axios
+        .post("http://localhost:8081/api/workouts", workoutData)
+        .then((response) => {
+          console.log("Workout created:", response.data);
+          alert("Workout successfully created!");
           setWorkoutExercises([]);
+          setCompletionDate("");
         })
-        .catch(error => {
-          console.error('Error creating workout:', error);
-          alert('Error creating workout. Please try again.');
+        .catch((error) => {
+          console.error("Error creating workout:", error);
+          alert("Error creating workout. Please try again.");
         });
     } else {
-      alert('Please add at least one exercise.');
+      alert("Please add at least one exercise.");
     }
   };
-  
 
   return (
     <div>
@@ -137,6 +140,17 @@ export const WorkoutForm = () => {
           label="Workout Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          margin="normal"
+          fullWidth
+        />
+      </FormControl>
+
+      <h4>Workout Date:</h4>
+      <FormControl fullWidth margin="normal">
+        <TextField
+          type="date"
+          value={completionDate}
+          onChange={(e) => setCompletionDate(e.target.value)}
           margin="normal"
           fullWidth
         />
