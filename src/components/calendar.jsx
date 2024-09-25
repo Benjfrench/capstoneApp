@@ -77,36 +77,37 @@ export const CustomMonthLayout = ({ onDayClick }) => {
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div>
-        <DateCalendar
-          value={selectedDate}
-          onChange={handleDateChange}
-          showDaysOutsideCurrentMonth
-          fixedWeekNumber={6}
-          onMonthChange={handleMonthChange}
-          loading={isLoading}
-          renderLoading={() => <div>Loading...</div>}
-          renderDay={(day, _value, DayComponentProps) => {
-            const formattedDay = day.format("YYYY-MM-DD");
-            const isSelected = shouldHighlightDay(day);
-            return (
-              <Badge
-                key={day.toString()}
-                overlap="circular"
-                badgeContent={isSelected ? "🌟" : undefined} // Highlight with a star badge
-              >
-                <PickersDay {...DayComponentProps} day={day} />
-              </Badge>
-            );
-          }}
-        />
+    <div>Calendar</div>
+    // <LocalizationProvider dateAdapter={AdapterDayjs}>
+    //   <div>
+    //     <DateCalendar
+    //       value={selectedDate}
+    //       onChange={handleDateChange}
+    //       showDaysOutsideCurrentMonth
+    //       fixedWeekNumber={6}
+    //       onMonthChange={handleMonthChange}
+    //       loading={isLoading}
+    //       renderLoading={() => <div>Loading...</div>}
+    //       renderDay={(day, _value, DayComponentProps) => {
+    //         const formattedDay = day.format("YYYY-MM-DD");
+    //         const isSelected = shouldHighlightDay(day);
+    //         return (
+    //           <Badge
+    //             key={day.toString()}
+    //             overlap="circular"
+    //             badgeContent={isSelected ? "🌟" : undefined} // Highlight with a star badge
+    //           >
+    //             <PickersDay {...DayComponentProps} day={day} />
+    //           </Badge>
+    //         );
+    //       }}
+    //     />
 
-        {/* Button to add an activity for the selected date */}
-        <button onClick={handleAddActivity} disabled={!selectedDate}>
-          Add Activity
-        </button>
-      </div>
-    </LocalizationProvider>
+    //     {/* Button to add an activity for the selected date */}
+    //     <button onClick={handleAddActivity} disabled={!selectedDate}>
+    //       Add Activity
+    //     </button>
+    //   </div>
+    // </LocalizationProvider>
   );
 };

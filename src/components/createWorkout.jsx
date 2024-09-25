@@ -304,7 +304,7 @@ export const WorkoutForm = () => {
         variant="contained"
         color="secondary"
         onClick={handleSubmit}
-        marginTop={2}
+        margintop={2}
       >
         Create Workout
       </Button>
