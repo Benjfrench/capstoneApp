@@ -12,6 +12,7 @@ import {
   Grid,
 } from "@mui/material";
 import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 
 const API_URL = "https://api.api-ninjas.com/v1/exercises";
 const API_KEY = "DfPjH7SAkpeXPyX/GBiY+g==EMVnIBTerldKSzdq";
@@ -38,6 +39,7 @@ const muscles = [
 const types = ["cardio", "strength", "stretching", "speed"];
 
 export const WorkoutForm = () => {
+  const { user } = useAuth();
   const [selectedMuscle, setSelectedMuscle] = useState("");
   const [selectedType, setSelectedType] = useState("");
   const [exercises, setExercises] = useState([]);
@@ -102,6 +104,7 @@ export const WorkoutForm = () => {
         description,
         completionDate,
         exercises: workoutExercises,
+        squadId: user.squadId,
       };
 
       axios
