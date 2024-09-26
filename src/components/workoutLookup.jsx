@@ -11,7 +11,7 @@ export const WorkoutLookup = () => {
   const fetchWorkoutsByDate = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8081/api/workouts/byDate?date=${date}`
+        `http://localhost:8081/api/workouts/byDate/${date}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
