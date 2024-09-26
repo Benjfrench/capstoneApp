@@ -1,7 +1,14 @@
 import { useState } from "react";
-import { Button, Dialog, DialogContent, TextField, Typography, Box } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  TextField,
+  Typography,
+  Box,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from '../context/AuthContext'; // Import your auth context
+import { useAuth } from "../context/AuthContext"; // Import your auth context
 
 export const LoginModal = () => {
   const [open, setOpen] = useState(false);
@@ -44,7 +51,7 @@ export const LoginModal = () => {
         handleClose(); // Close modal on successful login
         navigate("/calendar"); // Redirect to the desired route
       } else {
-        console.error("Login failed", data.error)
+        console.error("Login failed", data.error);
         setError(data.message);
       }
     } catch (err) {
@@ -60,25 +67,33 @@ export const LoginModal = () => {
 
   return (
     <div>
-      <Button color="inherit" onClick={handleClickOpen}>
+      <Button
+        color="inherit"
+        onClick={handleClickOpen}
+        sx={{
+          color: "white",
+          fontFamily: "Helvetica, Arial, sans-serif",
+          fontSize: "150%",
+        }}
+      >
         Login
       </Button>
       <Dialog
         open={open}
         onClose={handleClose}
-        sx={{ 
-          '& .MuiDialog-paper': {
-            width: "80%",
-            padding: '20px',
-            borderRadius: '10px',
-            backgroundColor: '#f0f0f0',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }
+        sx={{
+          "& .MuiDialog-paper": {
+            width: "20rem",
+            padding: 0,
+            borderRadius: "10px",
+            backgroundColor: "rgb(255, 51, 0)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          },
         }}
       >
-        <DialogContent sx={{ display: 'flex', justifyContent: 'center' }}>
+        <DialogContent sx={{ display: "flex", justifyContent: "center" }}>
           <Box
             component="form"
             onSubmit={handleLogin}
@@ -89,14 +104,19 @@ export const LoginModal = () => {
               flexDirection: "column",
               gap: 2,
               padding: 2,
-              border: "2px solid #ccc",
+              border: "0px solid #ccc",
               borderRadius: 2,
               boxShadow: "0 0 8px rgba(0, 0, 0, 0.1)",
-              backgroundColor: "white",
+              backgroundColor: "rgb(235, 228, 219)",
               alignItems: "center",
             }}
           >
-            <Typography variant="h4" component="h1" gutterBottom>
+            <Typography
+              variant="h4"
+              component="h1"
+              color={"rgb(255, 51, 0)"}
+              gutterBottom
+            >
               Login
             </Typography>
 
@@ -127,12 +147,25 @@ export const LoginModal = () => {
             )}
 
             {/* Buttons */}
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                backgroundColor: "rgb(255, 51, 0)",
+                color: "#fff",
+                "&:hover": { backgroundColor: "#FF7350" },
+              }}
+              fullWidth
+            >
               Login
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              sx={{
+                backgroundColor: "rgb(255, 51, 0)",
+                color: "#fff",
+                "&:hover": { backgroundColor: "#FF7350" },
+              }}
               fullWidth
               onClick={handleCreateAccount}
             >
@@ -140,7 +173,11 @@ export const LoginModal = () => {
             </Button>
             <Button
               variant="outlined"
-              color="secondary"
+              sx={{
+                backgroundColor: "white",
+                color: "rgb(255, 51, 0)",
+                "&:hover": { backgroundColor: "#FF4500", color: "white" },
+              }}
               fullWidth
               onClick={handleClose}
             >

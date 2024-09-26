@@ -1,10 +1,10 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Helvetica, system-ui, Avenir, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 51, 0);
   background-color: #000000;
   /* background-image: url('/BackgroundImage.jpg'); */
 
@@ -27,6 +27,10 @@ a:hover {
   color: #535bf2;
 }
 
+ul{
+  list-style-type: none;
+}
+
 body {
   margin: 0;
   display: flex;
@@ -44,7 +48,8 @@ h1 {
 
 h3 {
   padding: 0;
-  margin: 10
+  margin: 10;
+  font-style: italic;
 }
 
 p {

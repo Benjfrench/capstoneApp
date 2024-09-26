@@ -1,32 +1,42 @@
-import React, { useState } from 'react';
-import { TextField, Button, Typography, Box } from '@mui/material';
+import React, { useState } from "react";
+import { TextField, Button, Typography, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export const CreateAccount = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [emailId, setEmailId] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [squadId, setSquadId] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [squadId, setSquadId] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const navigate = useNavigate();
 
   const handleCreateAccount = async (e) => {
     e.preventDefault();
 
     // Basic validation
-    if (!firstName || !lastName || !emailId || !password || !confirmPassword || !squadId) {
-      setError('Please fill out all fields.');
+    if (
+      !firstName ||
+      !lastName ||
+      !emailId ||
+      !password ||
+      !confirmPassword ||
+      !squadId
+    ) {
+      setError("Please fill out all fields.");
       return;
     }
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+      setError("Passwords do not match.");
       return;
     }
 
-    setError('');
-    
+    setError("");
+
     const formData = {
       firstName,
       lastName,
@@ -36,10 +46,10 @@ export const CreateAccount = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8081/api/players/create', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8081/api/players/create", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -47,23 +57,27 @@ export const CreateAccount = () => {
       const result = await response.json();
 
       if (response.ok) {
-        setSuccess('Account created successfully!');
+        setSuccess("Account created successfully!");
       } else {
-        setError(result.error || 'Error creating account.');
+        setError(result.error || "Error creating account.");
       }
     } catch (error) {
-      setError('Failed to connect to the server.');
+      setError("Failed to connect to the server.");
     }
+  };
+
+  const handleCancel = () => {
+    navigate("/"); 
   };
 
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
       }}
     >
       <Typography variant="h4" component="h1" gutterBottom>
@@ -74,10 +88,10 @@ export const CreateAccount = () => {
         component="form"
         onSubmit={handleCreateAccount}
         sx={{
-          width: '100%',
+          width: "100%",
           maxWidth: 360,
-          display: 'flex',
-          flexDirection: 'column',
+          display: "flex",
+          flexDirection: "column",
           gap: 2,
         }}
       >
@@ -151,8 +165,29 @@ export const CreateAccount = () => {
           </Typography>
         )}
 
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            backgroundColor: "rgb(255, 51, 0)",
+            color: "#fff",
+            "&:hover": { backgroundColor: "#FF7350" },
+          }}
+          fullWidth
+        >
           Create Account
+        </Button>
+        <Button
+          variant="outlined"
+          onClick={handleCancel}
+          sx={{
+            marginTop: 2,
+            borderColor: "rgb(255, 51, 0)",
+            color: "rgb(255, 51, 0)",
+          }}
+          fullWidth
+        >
+          Cancel
         </Button>
       </Box>
     </Box>

@@ -7,14 +7,15 @@
   background-color: rgb(255, 255, 255);
 }
 
-.welcomePage {
-  background-image: url('/BackgroundImage.jpg'); /* Path assuming it's in the public folder */
+.WelcomePage {
+  display: flex; /* Use Flexbox to position child elements */
+  /* background-image: url('/BackgroundImage.jpg'); Path assuming it's in the public folder */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   
   /* Optional: Apply the faded effect */
-  background-color: rgba(255, 255, 255, 0.7);
+  /* background-color: rgba(255, 160, 136, 0.466); */
   background-blend-mode: lighten;
 
   /* Prevent horizontal overflow */
@@ -24,12 +25,50 @@
   box-sizing: border-box;
 }
 
-.welcomePageContent{
-  text-align: left;
-  padding: 10rem; /* This padding stays for your content */
-  background-color: transparent;
+.welcomePageContent, .additionalContent {
+  flex: 1; /* Allow both divs to take equal space */
+  padding: 5rem; /* This padding stays for your content */
+  background-color: rgb(235, 228, 219);
   box-sizing: border-box;
+  margin-top: 10rem; /* Adjusted for spacing */
+  border: 20px solid rgb(255, 51, 0); /* Set border as needed */
+  margin-bottom: 10%;
+  text-align: left;
+  border-radius: 8px;
 }
+
+.welcomePageContent{
+  margin-left: 10rem;
+  margin-right: 2rem;
+  border: white;
+  background-color: white;
+}
+
+ .additionalContent {
+  margin-left: 2rem;
+  margin-right: 10rem;
+ } 
+
+ @media (max-width: 1400px) {
+  .WelcomePage {
+    flex-direction: column; /* Stack the children vertically */
+  }
+
+  .welcomePageContent,
+  .additionalContent {
+    margin-left: 10%; /* Reset margin for stacking */
+    margin-right: 10%; /* Reset margin for stacking */
+    margin-top: 5%; /* Add some spacing between them */
+    /* width: 100%; Ensure both divs take full width */
+  }
+
+  .welcomePageContent {
+    margin-top: 7rem;
+    margin-bottom: 0;
+  }
+}
+
+
 
 .modalClass{
   width: 80%;
@@ -97,3 +136,11 @@ width: 100%;
   color: #888;
 }
 
+.navCss{
+  position: fixed;
+  width: 100%;
+}
+
+.toolbar{
+  background-color: rgb(255, 51, 0);
+}

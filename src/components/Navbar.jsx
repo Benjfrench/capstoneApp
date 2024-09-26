@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { LoginModal } from './loginModal';
 import { useAuth } from '../context/AuthContext';
+import '../App.css';
 
 export const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -29,18 +30,19 @@ export const Navbar = () => {
   };
 
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 0, marginLeft: '1rem' }}>
+    <div className='navCss'>
+    <AppBar position="static" className='appbar'>
+      <Toolbar className='toolbar'>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 0, marginLeft: '1rem', color:'white', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '150%' }}>
           TeamTrainer
         </Typography>
 
         <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, justifyContent: 'flex-end' }}>
+          <Button color="inherit" component={Link} to="/" sx={{color:'white', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '150%' }}>Home</Button>
           {user ? ( // Check if user is logged in
             <>
-              <Button color="inherit" component={Link} to="/">Home</Button>
-              <Button color="inherit" component={Link} to="/calendar">WorkoutHub</Button>
-              <Button color="inherit" onClick={handleLogout}>Logout</Button> {/* Show logout if user is logged in */}
+              <Button color="inherit" component={Link} to="/calendar" sx={{color:'white', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '150%' }}>WorkoutHub</Button>
+              <Button color="inherit" onClick={handleLogout} sx={{color:'white', fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '150%' }}>Logout</Button> 
             </>
           ) : (
             <LoginModal /> // Show login modal if user is not logged in
@@ -78,5 +80,6 @@ export const Navbar = () => {
         </Menu>
       </Toolbar>
     </AppBar>
+    </div>
   );
 };
