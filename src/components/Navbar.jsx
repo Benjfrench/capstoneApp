@@ -36,12 +36,12 @@ export const Navbar = () => {
         </Typography>
 
         <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, justifyContent: 'flex-end' }}>
-          <Button color="inherit" component={Link} to="/">Home</Button>
-          <Button color="inherit" component={Link} to="/calendar">Calendar</Button>
-          <Button color="inherit" component={Link} to="/workout">Workout</Button>
-          <Button color="inherit" component={Link} to="/createWorkout">Create Workout</Button>
-          {user ? (
-            <Button color="inherit" onClick={handleLogout}>Logout</Button> // Show logout if user is logged in
+          {user ? ( // Check if user is logged in
+            <>
+              <Button color="inherit" component={Link} to="/">Home</Button>
+              <Button color="inherit" component={Link} to="/calendar">WorkoutHub</Button>
+              <Button color="inherit" onClick={handleLogout}>Logout</Button> {/* Show logout if user is logged in */}
+            </>
           ) : (
             <LoginModal /> // Show login modal if user is not logged in
           )}
@@ -62,10 +62,19 @@ export const Navbar = () => {
           onClose={handleMenuClose}
           sx={{ display: { xs: 'block', md: 'none' } }}
         >
-          <MenuItem component={Link} to="/" onClick={handleMenuClose}>Home</MenuItem>
-          <MenuItem component={Link} to="/calendar" onClick={handleMenuClose}>Calendar</MenuItem>
-          <MenuItem component={Link} to="/workout" onClick={handleMenuClose}>Workout</MenuItem>
-          <MenuItem component={Link} to="/createWorkout" onClick={handleMenuClose}>Create Workout</MenuItem>
+          {user ? ( // Check if user is logged in for mobile menu
+            <>
+              <MenuItem component={Link} to="/" onClick={handleMenuClose}>Home</MenuItem>
+              <MenuItem component={Link} to="/calendar" onClick={handleMenuClose}>Calendar</MenuItem>
+              <MenuItem component={Link} to="/workout" onClick={handleMenuClose}>Workout</MenuItem>
+              <MenuItem component={Link} to="/createWorkout" onClick={handleMenuClose}>Create Workout</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </>
+          ) : (
+            <MenuItem onClick={handleMenuClose}>
+              <LoginModal /> {/* Show login modal if user is not logged in */}
+            </MenuItem>
+          )}
         </Menu>
       </Toolbar>
     </AppBar>
