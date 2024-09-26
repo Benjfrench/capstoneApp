@@ -68,7 +68,11 @@
   }
 }
 
-
+.workoutLookup{
+  margin: 5rem;
+  padding: 2px;
+  padding-bottom: 10rem;
+}
 
 .modalClass{
   width: 80%;
@@ -143,4 +147,12 @@ width: 100%;
 
 .toolbar{
   background-color: rgb(255, 51, 0);
+}
+
+.loginMobile {
+  display: flex;                
+  justify-content: center;      
+  align-items: center;          
+  height: 100vh;                
+  background-color: #f9f9f9;   
 }

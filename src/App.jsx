@@ -9,6 +9,7 @@ import { WorkoutPage } from "./containers/WorkoutContainer";
 import { CreateWorkoutPage } from "./containers/CreateWorkoutCont";
 import { CreateAccountPage } from "./containers/CreateAccount";
 import { ProtectedRoute } from "./components/ProtectedRoute"; 
+import { LoginMobilePage } from "./containers/loginPage";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/workout" element={<ProtectedRoute element={<WorkoutPage />} />} />
         <Route path="/createWorkout" element={<ProtectedRoute element={<CreateWorkoutPage />} />} />
         <Route path="/createAccount" element={<CreateAccountPage />} />
+        <Route path="/loginPage" element={<LoginMobilePage />} />
         <Route path="*" element={<div>This path doesn't exist yet...</div>} />
       </Routes>
     </AuthProvider>

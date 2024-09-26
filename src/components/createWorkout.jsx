@@ -10,6 +10,7 @@ import {
   CardContent,
   Typography,
   Grid,
+  Box,
 } from "@mui/material";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
@@ -268,14 +269,6 @@ export const WorkoutForm = () => {
               </MenuItem>
             ))}
           </TextField>
-
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleAddExercise}
-          >
-            Add Exercise
-          </Button>
         </div>
       )}
 
@@ -302,15 +295,42 @@ export const WorkoutForm = () => {
           </Grid>
         )}
       </div>
+      <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between", // Align buttons side by side
+        marginTop: "2rem",
+      }}
+    >
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleAddExercise}
+        sx={{
+          backgroundColor: "rgb(255, 51, 0)",
+          color: "#fff",
+          "&:hover": { backgroundColor: "#FF7350" },
+          margin: "2rem",
+        }}
+      >
+        Add Exercise
+      </Button>
 
       <Button
         variant="contained"
         color="secondary"
         onClick={handleSubmit}
         margintop={2}
+        sx={{
+          backgroundColor: "rgb(255, 51, 0)",
+          color: "#fff",
+          "&:hover": { backgroundColor: "#FF7350" },
+          margin: "2rem",
+        }}
       >
         Create Workout
       </Button>
+      </Box>
     </div>
   );
 };

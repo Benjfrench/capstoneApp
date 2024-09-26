@@ -3,6 +3,7 @@ import { CustomMonthLayout } from "../components/calendar";
 import { FormModal } from "../components/modal";
 import { AuthProvider } from "../context/AuthContext";
 import { WorkoutLookup } from "../components/workoutLookup";
+import "../App.css";
 // import { DynamicCalendar } from "../components/dynamicCalendar";
 
 export const CalendarPage = () => {
@@ -16,7 +17,7 @@ export const CalendarPage = () => {
 
   return (
     <AuthProvider>
-      <div>
+      <div className="workoutLookup">
         {/* <DynamicCalendar/> */}
         <WorkoutLookup />
         {/* Display the activity for the selected day */}
