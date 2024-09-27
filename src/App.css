@@ -63,8 +63,23 @@
   }
 
   .welcomePageContent {
-    margin-top: 7rem;
+    margin-top: 5rem;
     margin-bottom: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .welcomePageContent {
+    text-align: center; /* Center the text */
+    padding: 10px;     /* Add padding */
+    margin-top: 2rem;
+  }
+
+  .additionalContent {
+    text-align: center; /* Center the text */
+    padding: 10px;     /* Add padding */
+    font-size: 14px;   /* Smaller font size for better readability */
+
   }
 }
 
