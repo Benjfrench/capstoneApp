@@ -54,6 +54,10 @@ export const WorkoutForm = () => {
   const [description, setDescription] = useState("");
   const [completionDate, setCompletionDate] = useState("");
 
+  // State for messages
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   useEffect(() => {
     if (selectedMuscle || selectedType) {
       axios
@@ -95,6 +99,13 @@ export const WorkoutForm = () => {
       setSets("");
       setReps("");
       setRest("");
+      // Set success message
+      setSuccessMessage("Exercise added successfully!");
+      setErrorMessage("");
+    } else {
+      // Set error message
+      setErrorMessage("Please fill in all exercise details.");
+      setSuccessMessage("");
     }
   };
 
@@ -112,21 +123,24 @@ export const WorkoutForm = () => {
         .post("http://localhost:8081/api/workouts", workoutData)
         .then((response) => {
           console.log("Workout created:", response.data);
-          alert("Workout successfully created!");
+          setSuccessMessage("Workout successfully created!");
+          setErrorMessage("");
           setWorkoutExercises([]);
           setCompletionDate("");
         })
         .catch((error) => {
           console.error("Error creating workout:", error);
-          alert("Error creating workout. Please try again.");
+          setErrorMessage("Error creating workout. Please try again.");
+          setSuccessMessage("");
         });
     } else {
-      alert("Please add at least one exercise.");
+      setErrorMessage("Please add at least one exercise.");
+      setSuccessMessage("");
     }
   };
 
   return (
-    <div>
+    <Box sx={{ padding: "2rem" }}>
       <h4>Name:</h4>
       <FormControl fullWidth margin="normal">
         <TextField
@@ -163,7 +177,6 @@ export const WorkoutForm = () => {
       <h4>Parameters:</h4>
 
       <FormControl fullWidth margin="normal">
-        {/* <InputLabel>Filter by Muscle</InputLabel> */}
         <Select
           value={selectedMuscle}
           onChange={(e) => setSelectedMuscle(e.target.value)}
@@ -181,7 +194,6 @@ export const WorkoutForm = () => {
       </FormControl>
 
       <FormControl fullWidth margin="normal">
-        {/* <InputLabel>Filter by Type</InputLabel> */}
         <Select
           value={selectedType}
           onChange={(e) => setSelectedType(e.target.value)}
@@ -199,7 +211,6 @@ export const WorkoutForm = () => {
       </FormControl>
 
       <FormControl fullWidth margin="normal">
-        {/* <InputLabel>Choose Exercise</InputLabel> */}
         <Select
           value={selectedExercise}
           onChange={handleExerciseChange}
@@ -245,10 +256,7 @@ export const WorkoutForm = () => {
             select
           >
             <MenuItem value="N/A">N/A</MenuItem>
-            {[
-              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-              20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-            ].map((i) => (
+            {Array.from({ length: 30 }, (_, i) => i + 1).map((i) => (
               <MenuItem key={i} value={i}>
                 {i}
               </MenuItem>
@@ -280,14 +288,9 @@ export const WorkoutForm = () => {
                 <Card>
                   <CardContent>
                     <Typography variant="h6">{exercise.name}</Typography>
-                    <Typography>Sets: {exercise.sets || "N/A"}</Typography>
-                    <Typography>Reps: {exercise.reps || "N/A"}</Typography>
-                    <Typography>
-                      Rest: {exercise.rest || "N/A"} seconds
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {exercise.instructions}
-                    </Typography>
+                    <Typography>Sets: {exercise.sets}</Typography>
+                    <Typography>Reps: {exercise.reps}</Typography>
+                    <Typography>Rest: {exercise.rest} seconds</Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -295,17 +298,12 @@ export const WorkoutForm = () => {
           </Grid>
         )}
       </div>
-      <Box
-      sx={{
-        display: "flex",
-        justifyContent: "space-between", // Align buttons side by side
-        marginTop: "2rem",
-      }}
-    >
+
       <Button
         variant="contained"
         color="primary"
         onClick={handleAddExercise}
+        margintop={2}
         sx={{
           backgroundColor: "rgb(255, 51, 0)",
           color: "#fff",
@@ -315,6 +313,7 @@ export const WorkoutForm = () => {
       >
         Add Exercise
       </Button>
+
 
       <Button
         variant="contained"
@@ -330,7 +329,18 @@ export const WorkoutForm = () => {
       >
         Create Workout
       </Button>
-      </Box>
-    </div>
+
+      {/* Display success or error message after creating the workout */}
+      {successMessage && (
+        <Typography color="green" variant="body1">
+          {successMessage}
+        </Typography>
+      )}
+      {errorMessage && (
+        <Typography color="red" variant="body1">
+          {errorMessage}
+        </Typography>
+      )}
+    </Box>
   );
 };
