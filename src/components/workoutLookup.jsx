@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { Button } from "@mui/material";
+import { WorkoutModal } from "./workoutModal";
 
 export const WorkoutLookup = () => {
   const [date, setDate] = useState("");
   const [workouts, setWorkouts] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [selectedWorkout, setSelectedWorkout] = useState(null); // Holds the selected workout's data
 
   const handleDateChange = (e) => {
     setDate(e.target.value);
@@ -23,6 +27,13 @@ export const WorkoutLookup = () => {
     }
   };
 
+  // Open and close modal handlers
+  const handleOpen = (workout) => {
+    setSelectedWorkout(workout);
+    setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
+
   return (
     <div>
       <h1>Workout Lookup</h1>
@@ -36,7 +47,7 @@ export const WorkoutLookup = () => {
               <li key={workout.id}>
                 <strong>{workout.name}</strong> -{" "}
                 {new Date(workout.completionDate).toLocaleDateString()}
-                <p>{workout.description}</p>
+                <Button onClick={() => handleOpen(workout)}>View Details</Button>
               </li>
             ))}
           </ul>
@@ -44,8 +55,13 @@ export const WorkoutLookup = () => {
           <p>No workouts found for this date.</p>
         )}
       </div>
+
+      {/* Use the WorkoutModal component */}
+      <WorkoutModal 
+        open={open} 
+        handleClose={handleClose} 
+        selectedWorkout={selectedWorkout} 
+      />
     </div>
   );
 };
-
-

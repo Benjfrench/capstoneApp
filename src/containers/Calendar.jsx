@@ -3,8 +3,8 @@ import { CustomMonthLayout } from "../components/calendar";
 import { FormModal } from "../components/modal";
 import { AuthProvider } from "../context/AuthContext";
 import { WorkoutLookup } from "../components/workoutLookup";
+import { WorkoutFeed } from "../components/workoutFeed";
 import "../App.css";
-// import { DynamicCalendar } from "../components/dynamicCalendar";
 
 export const CalendarPage = () => {
   const [selectedActivity, setSelectedActivity] = useState(null);
@@ -18,8 +18,8 @@ export const CalendarPage = () => {
   return (
     <AuthProvider>
       <div className="workoutLookup">
-        {/* <DynamicCalendar/> */}
         <WorkoutLookup />
+        <WorkoutFeed/>
         {/* Display the activity for the selected day */}
         {selectedDate && (
           <div>
