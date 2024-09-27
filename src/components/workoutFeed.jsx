@@ -50,7 +50,7 @@ export const WorkoutFeed = () => {
   return (
     <div>
       <h1>Upcoming Workouts</h1>
-      <div>
+      <div className="ticker">
         {workouts.length > 0 ? (
           <ul>
             {workouts.map((workout) => (
@@ -58,7 +58,11 @@ export const WorkoutFeed = () => {
                 <strong>{workout.name}</strong> -{" "}
                 {new Date(workout.completionDate).toLocaleDateString()}
                 {/* Add a button to open the modal */}
-                <Button onClick={() => handleOpen(workout)}>View Details</Button>
+                <Button onClick={() => handleOpen(workout)}
+                    sx={{
+                        color: "rgb(255, 51, 0)",
+                        "&:hover": { backgroundColor: "#FF7350" },
+                      }}>View Details</Button>
               </li>
             ))}
           </ul>

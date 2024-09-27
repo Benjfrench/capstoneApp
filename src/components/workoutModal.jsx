@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Modal, Box, Typography, Button, Card, CardContent } from "@mui/material";
 
 const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 600,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: { xs: '90%', sm: 600 }, 
+    maxHeight: '80%',
+    overflowY: 'auto',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
 
 export const WorkoutModal = ({ open, handleClose, selectedWorkout }) => {
   const [exercises, setExercises] = useState([]);
@@ -77,11 +79,11 @@ export const WorkoutModal = ({ open, handleClose, selectedWorkout }) => {
             ) : error ? (
               <p>Error fetching exercises: {error}</p>
             ) : (
-              <div>
+              <div className="exerciseContainer">
                 {exercises.length > 0 ? (
                   exercises.map((exercise) => {
                     return (
-                      <Card key={exercise.id} sx={{ mt: 2 }}>
+                      <Card key={exercise.id} sx={{ mt: 2, width: '95%' }}>
                         <CardContent>
                           <Typography variant="h6">{exercise.name}</Typography>
                           <Typography color="text.secondary">Reps: {exercise.reps}</Typography>
@@ -110,7 +112,11 @@ export const WorkoutModal = ({ open, handleClose, selectedWorkout }) => {
                 )}
               </div>
             )}
-            <Button onClick={handleClose} sx={{ mt: 2 }}>Close</Button>
+            <Button onClick={handleClose} sx={{
+            backgroundColor: "rgb(255, 51, 0)",
+            color: "#fff",
+            "&:hover": { backgroundColor: "#FF7350" },
+          }}>Close</Button>
           </>
         )}
       </Box>

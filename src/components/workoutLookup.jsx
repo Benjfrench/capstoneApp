@@ -59,7 +59,11 @@ export const WorkoutLookup = () => {
               <li key={workout.id}>
                 <strong>{workout.name}</strong> -{" "}
                 {new Date(workout.completionDate).toLocaleDateString()}
-                <Button onClick={() => handleOpen(workout)}>
+                <Button onClick={() => handleOpen(workout)}
+                  sx={{
+                    color: "rgb(255, 51, 0)",
+                    "&:hover": { backgroundColor: "#FF7350" },
+                  }}>
                   View Details
                 </Button>
               </li>
