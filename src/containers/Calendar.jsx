@@ -20,8 +20,7 @@ export const CalendarPage = () => {
       <div className="workoutLookup">
         <WorkoutLookup />
         <WorkoutFeed/>
-        {/* Display the activity for the selected day */}
-        {selectedDate && (
+        {/* {selectedDate && (
           <div>
             <h3>Selected Date: {selectedDate}</h3>
             {selectedActivity ? (
@@ -30,7 +29,7 @@ export const CalendarPage = () => {
               <p>No activity for this day.</p>
             )}
           </div>
-        )}
+        )} */}
         <FormModal />
       </div>
     </AuthProvider>

@@ -37,8 +37,20 @@ export const WorkoutLookup = () => {
   return (
     <div>
       <h1>Workout Lookup</h1>
-      <input type="date" value={date} onChange={handleDateChange} />
-      <button onClick={fetchWorkoutsByDate}>Fetch Workouts</button>
+      <div className="dateInputContainer">
+        <input type="date" value={date} onChange={handleDateChange} />
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "rgb(255, 51, 0)",
+            color: "#fff",
+            "&:hover": { backgroundColor: "#FF7350" },
+          }}
+          onClick={fetchWorkoutsByDate}
+        >
+          Fetch Workouts
+        </Button>
+      </div>
 
       <div>
         {workouts.length > 0 ? (
@@ -47,7 +59,9 @@ export const WorkoutLookup = () => {
               <li key={workout.id}>
                 <strong>{workout.name}</strong> -{" "}
                 {new Date(workout.completionDate).toLocaleDateString()}
-                <Button onClick={() => handleOpen(workout)}>View Details</Button>
+                <Button onClick={() => handleOpen(workout)}>
+                  View Details
+                </Button>
               </li>
             ))}
           </ul>
@@ -57,10 +71,10 @@ export const WorkoutLookup = () => {
       </div>
 
       {/* Use the WorkoutModal component */}
-      <WorkoutModal 
-        open={open} 
-        handleClose={handleClose} 
-        selectedWorkout={selectedWorkout} 
+      <WorkoutModal
+        open={open}
+        handleClose={handleClose}
+        selectedWorkout={selectedWorkout}
       />
     </div>
   );
